@@ -1,6 +1,6 @@
 import { AppPage } from './app.po';
 
-describe('sicsha-admin App', () => {
+describe('sicsha App', () => {
   let page: AppPage;
 
   beforeEach(() => {
