@@ -8,6 +8,7 @@ import {BreakFastMenu} from "./Data/BreakFastMenu";
 import {LunchMenu} from "./Data/LunchMenu";
 import {DinnerMenu} from "./Data/DinnerMenu";
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
