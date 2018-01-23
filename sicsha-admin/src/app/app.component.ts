@@ -12,11 +12,12 @@ import {DinnerMenu} from "./Data/DinnerMenu";
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  providers: [MainRepository]
+  providers: [MainRepository],
 })
 export class AppComponent implements OnInit{
 
   menuData = new menutype();
+  sicshaList: DateMenu[];
   centerList: string[];
   foodTimeList: string[];
 
@@ -29,6 +30,10 @@ export class AppComponent implements OnInit{
       this.centerList = value;
     });
 
+    this.repository.getSicshaList().then(value => {
+      this.sicshaList = value;
+    })
+
     this.foodTimeList = ["breakfast", "lunch", "dinner"];
   }
 
@@ -36,48 +41,33 @@ export class AppComponent implements OnInit{
     console.log(this.menuData.date)
     let body = JSON.stringify(this.menuData);
     console.log(body);
-    this.generateMenuData();
+    let param = this.generateMenuData();
+
+    this.repository.registMenu(this.sicshaList.length, JSON.stringify(param));
   }
 
   generateMenuData(): DateMenu{
-    let inputMenu = new DateMenu();
-    inputMenu.date = this.menuData.date
-
     let restaurant = new RestaurantMenu();
     restaurant.centerName = this.menuData.centerName;
-
     let time = this.menuData.time;
+
     if(time == "breakfast"){
       let breakfastMenu = new BreakFastMenu();
       breakfastMenu.breakfast = this.getElementMenuList();
-
       restaurant.menu = breakfastMenu;
-
-      let restaurantList: [RestaurantMenu];
-      restaurantList = [restaurant];
-      inputMenu.rastaurant = restaurantList;
 
     }else if(time == "lunch"){
       let lunchMenu = new LunchMenu();
       lunchMenu.lunch = this.getElementMenuList();
-
       restaurant.menu = lunchMenu;
 
-      let restaurantList: [RestaurantMenu];
-      restaurantList = [restaurant];
-      inputMenu.rastaurant = restaurantList;
     }else if(time == "dinner"){
       let dinnerMenu = new DinnerMenu();
       dinnerMenu.dinner = this.getElementMenuList();
-
       restaurant.menu = dinnerMenu;
-
-      let restaurantList: [RestaurantMenu];
-      restaurantList = [restaurant];
-      inputMenu.rastaurant = restaurantList;
     }
 
-    return inputMenu;
+    return this.getRestaurant(restaurant);
   }
 
   getElementMenuList(): [ElementMenu]{
@@ -89,6 +79,17 @@ export class AppComponent implements OnInit{
     elementMenuList = [elementMenu];
 
     return elementMenuList;
+  }
+
+  getRestaurant(restaurant: RestaurantMenu): DateMenu{
+    let restaurantList: RestaurantMenu[] = [];
+    restaurantList.push(restaurant);
+
+    let inputMenu = new DateMenu();
+    inputMenu.date = this.menuData.date
+    inputMenu.rastaurant = restaurantList;
+
+    return inputMenu;
   }
 
 }

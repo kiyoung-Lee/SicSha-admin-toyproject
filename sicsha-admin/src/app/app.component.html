@@ -1,48 +1,54 @@
+<!--<mat-tab-group>-->
+  <!--<mat-tab label="Tab 1"> Content-1 </mat-tab>-->
+  <!--<mat-tab label="Tab 2">Content-2 </mat-tab>-->
+<!--</mat-tab-group>-->
+
 <div>
-  <span >
-    센터명 :
-  </span>
-  <select [(ngModel)]="menuData.centerName">
-    <option [value]="null">선택</option>
-    <option *ngFor="let centerName of centerList" [value]="centerName">
-      {{centerName}}
-    </option>
-  </select>
+<span >
+센터명 :
+</span>
+<select [(ngModel)]="menuData.centerName">
+<option [value]="null">선택</option>
+<option *ngFor="let centerName of centerList" [value]="centerName">
+{{centerName}}
+</option>
+</select>
 </div>
 
 <div>
-  <span >
-    날짜 :
-  </span>
-    <input type="text" [(ngModel)]="menuData.date">
+<span >
+날짜 :
+</span>
+<input type="text" [(ngModel)]="menuData.date">
 </div>
 
 <div>
-  <span >
-    식사시간 :
-  </span>
-  <select [(ngModel)]="menuData.time">
-    <option [value]="null">선택</option>
-    <option *ngFor="let foodTime of foodTimeList" [value]="foodTime">
-      {{foodTime}}
-    </option>
-  </select>
+<span >
+식사시간 :
+</span>
+<select [(ngModel)]="menuData.time">
+<option [value]="null">선택</option>
+<option *ngFor="let foodTime of foodTimeList" [value]="foodTime">
+{{foodTime}}
+</option>
+</select>
 </div>
 
 <div>
-  <span >
-    메뉴타입 :
-  </span>
-  <input type="text" [(ngModel)]="menuData.type">
+<span >
+메뉴타입 :
+</span>
+<input type="text" [(ngModel)]="menuData.type">
 </div>
 
 <div>
-  <span >
-    메뉴 :
-  </span>
-  <input type="text" [(ngModel)] = "menuData.menu">
+<span >
+메뉴 :
+</span>
+<input type="text" [(ngModel)] = "menuData.menu">
 </div>
 
 <button (click)="clickBtnRegist($event)">
-  등록
+등록
 </button>
+
