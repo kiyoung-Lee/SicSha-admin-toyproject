@@ -8,6 +8,17 @@ export class MainRepository{
 
   }
 
+  getDateList(): Promise<any>{
+    const result = new Promise((resolve, reject) => {
+      this.http.get('https://sicsha-7c1e2.firebaseio.com/dateList.json')
+        .subscribe(response => {
+          var res = response.json();
+          resolve(res);
+        });
+    });
+    return result;
+  }
+
   getCenterList(): Promise<any>{
     const result = new Promise((resolve, reject) => {
       this.http.get('https://sicsha-7c1e2.firebaseio.com/centerList.json')

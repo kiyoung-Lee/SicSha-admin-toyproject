@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {menutype} from './Data/app.menutype';
+import {PageType} from './Data/PageType';
 import {MainRepository} from './app.repository';
 import {ElementMenu} from "./Data/ElementMenu";
 import {DateMenu} from "./Data/DateMenu";
@@ -7,7 +7,7 @@ import {RestaurantMenu} from "./Data/RestaurantMenu";
 import {BreakFastMenu} from "./Data/BreakFastMenu";
 import {LunchMenu} from "./Data/LunchMenu";
 import {DinnerMenu} from "./Data/DinnerMenu";
-
+import { AngularFireDatabase } from 'angularfire2/database';
 
 @Component({
   selector: 'app-root',
@@ -17,16 +17,28 @@ import {DinnerMenu} from "./Data/DinnerMenu";
 })
 export class AppComponent implements OnInit{
 
-  menuData = new menutype();
+
+  menuData = new PageType();
   sicshaList: DateMenu[];
+
+  dateList: string[];
   centerList: string[];
   foodTimeList: string[];
 
-  constructor(private repository: MainRepository) {
+  constructor(private repository: MainRepository, private db: AngularFireDatabase) {
 
   }
 
   ngOnInit() {
+    this.pageDataInit();
+
+  }
+
+  pageDataInit(){
+    this.repository.getDateList().then( value => {
+      this.dateList = value;
+    })
+
     this.repository.getCenterList().then(value => {
       this.centerList = value;
     });
@@ -36,6 +48,14 @@ export class AppComponent implements OnInit{
     })
 
     this.foodTimeList = ["breakfast", "lunch", "dinner"];
+  }
+
+  clickDateRegist($event){
+
+  }
+
+  clickCenterRegist($event){
+
   }
 
   clickBtnRegist($event) {
