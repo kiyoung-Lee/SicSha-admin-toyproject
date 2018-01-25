@@ -1,0 +1,111 @@
+<div>
+  <span>
+    날짜입력
+  </span>
+</div>
+
+<br>
+
+<div>
+  <span >
+    날짜 :
+  </span>
+  <input type="text">
+</div>
+
+<button (click)="clickDateRegist($event)">
+  날짜등록
+</button>
+
+<br>
+<br>
+
+<div>
+  <span>
+    센터등록
+  </span>
+</div>
+
+<br>
+
+<div>
+  <span >
+    날짜 :
+  </span>
+  <select>
+    <option [value]="null">선택</option>
+  </select>
+</div>
+
+<div>
+  <span >
+    센터명 :
+  </span>
+  <input type="text">
+</div>
+
+<button (click)="clickCenterRegist($event)">
+  센터등록
+</button>
+
+<br>
+<br>
+
+<div>
+  <span>
+    메뉴등록
+  </span>
+</div>
+
+<br>
+
+<div>
+  <span >
+    날짜 :
+  </span>
+  <select>
+    <option [value]="null">선택</option>
+  </select>
+</div>
+
+<div>
+  <span >
+    센터명 :
+  </span>
+  <select [(ngModel)]="menuData.centerName">
+    <option [value]="null">선택</option>
+    <option *ngFor="let centerName of centerList" [value]="centerName">
+      {{centerName}}
+    </option>
+  </select>
+</div>
+
+<div>
+  <span >
+    식사시간 :
+  </span>
+  <select [(ngModel)]="menuData.time">
+    <option [value]="null">선택</option>
+    <option *ngFor="let foodTime of foodTimeList" [value]="foodTime">
+      {{foodTime}}
+    </option>
+  </select>
+</div>
+
+<div>
+  <span >
+    메뉴타입 :
+  </span>
+  <input type="text" [(ngModel)]="menuData.type">
+</div>
+
+<div>
+  <span >
+    메뉴 :
+  </span>
+  <input type="text" [(ngModel)] = "menuData.menu">
+</div>
+
+<button (click)="clickBtnRegist($event)">
+  메뉴등록
+</button>

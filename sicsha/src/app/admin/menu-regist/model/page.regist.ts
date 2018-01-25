@@ -1,4 +1,4 @@
-export class PageType {
+export class RegistFormData {
   centerName: string = null;
   date: string;
   time: string = null;

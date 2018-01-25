@@ -1,4 +1,4 @@
-import {RestaurantMenu} from "./RestaurantMenu";
+import {RestaurantMenu} from "./menu.restaurant";
 
 export class DateMenu {
 
