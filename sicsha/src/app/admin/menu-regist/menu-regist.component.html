@@ -1,111 +1,74 @@
-<div>
-  <span>
-    날짜입력
-  </span>
-</div>
+<mat-card class="regist-card">
+  <mat-card-content>
+    <form class="example-form">
+      <mat-form-field>
+        <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <button mat-raised-button [color]="'primary'" (click)="clickDateRegist($event)">날짜 등록</button>
+    </form>
+  </mat-card-content>
+</mat-card>
 
-<br>
+<mat-card class="regist-card">
+  <mat-card-content>
+    <form class="example-form">
+      <mat-form-field class="example-full-width">
+        <mat-select placeholder="날짜">
+          <mat-option>
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="센터명">
+      </mat-form-field>
+      <button mat-raised-button [color]="'primary'" (click)="clickCenterRegist($event)">센터등록</button>
+    </form>
+  </mat-card-content>
+</mat-card>
 
-<div>
-  <span >
-    날짜 :
-  </span>
-  <input type="text">
-</div>
-
-<button (click)="clickDateRegist($event)">
-  날짜등록
-</button>
-
-<br>
-<br>
-
-<div>
-  <span>
-    센터등록
-  </span>
-</div>
-
-<br>
-
-<div>
-  <span >
-    날짜 :
-  </span>
-  <select>
-    <option [value]="null">선택</option>
-  </select>
-</div>
-
-<div>
-  <span >
-    센터명 :
-  </span>
-  <input type="text">
-</div>
-
-<button (click)="clickCenterRegist($event)">
-  센터등록
-</button>
-
-<br>
-<br>
-
-<div>
-  <span>
-    메뉴등록
-  </span>
-</div>
-
-<br>
-
-<div>
-  <span >
-    날짜 :
-  </span>
-  <select>
-    <option [value]="null">선택</option>
-  </select>
-</div>
-
-<div>
-  <span >
-    센터명 :
-  </span>
-  <select [(ngModel)]="menuData.centerName">
-    <option [value]="null">선택</option>
-    <option *ngFor="let centerName of centerList" [value]="centerName">
-      {{centerName}}
-    </option>
-  </select>
-</div>
-
-<div>
-  <span >
-    식사시간 :
-  </span>
-  <select [(ngModel)]="menuData.time">
-    <option [value]="null">선택</option>
-    <option *ngFor="let foodTime of foodTimeList" [value]="foodTime">
-      {{foodTime}}
-    </option>
-  </select>
-</div>
-
-<div>
-  <span >
-    메뉴타입 :
-  </span>
-  <input type="text" [(ngModel)]="menuData.type">
-</div>
-
-<div>
-  <span >
-    메뉴 :
-  </span>
-  <input type="text" [(ngModel)] = "menuData.menu">
-</div>
-
-<button (click)="clickBtnRegist($event)">
-  메뉴등록
-</button>
+<mat-card class="regist-card">
+  <mat-card-content>
+    <div>
+      <form class="example-form">
+        <mat-form-field class="example-full-width">
+          <mat-select [(ngModel)] = "menuData.date" [ngModelOptions]="{standalone: true}" placeholder="날짜">
+            <mat-option>
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-select [(ngModel)] = "menuData.centerName" [ngModelOptions]="{standalone: true}" placeholder="센터명">
+            <mat-option>
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </form>
+    </div>
+    <div>
+      <form class="example-form">
+        <mat-form-field class="example-full-width">
+          <mat-select [(ngModel)] = "menuData.time" [ngModelOptions]="{standalone: true}" placeholder="식사시간">
+            <mat-option>
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-select [(ngModel)] = "menuData.type" [ngModelOptions]="{standalone: true}" placeholder="메뉴타입">
+            <mat-option>
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </form>
+    </div>
+    <div>
+      <form class="example-form">
+        <mat-form-field class="input-menu-form">
+          <input [(ngModel)] = "menuData.menu" [ngModelOptions]="{standalone: true}" matInput  placeholder="메뉴">
+        </mat-form-field>
+        <button mat-raised-button [color]="'primary'" (click)="clickCenterRegist($event)">메뉴등록</button>
+      </form>
+    </div>
+  </mat-card-content>
+</mat-card>

@@ -13,8 +13,15 @@ import { environment } from "./../environments/environment";
 import { AppComponent } from './app.component';
 import {FormsModule} from "@angular/forms";
 import {HttpModule} from "@angular/http";
-import {MatTabsModule} from '@angular/material/tabs';
-import {MatButtonModule} from '@angular/material/button';
+import {
+  MatDatepickerModule,
+  MatCardModule,
+  MatButtonModule,
+  MatTabsModule,
+  MatInputModule,
+  MatNativeDateModule,
+  MatSelectModule
+} from '@angular/material';
 import { MenuRegistComponent } from './admin/menu-regist/menu-regist.component';
 import { NavComponent } from './core/nav/nav.component';
 import { Error404Component } from './core/error404/error404.component';
@@ -39,6 +46,11 @@ import { AdminComponent } from './admin/admin.component';
     AngularFireDatabaseModule,
     AppRoutingModule,
     MatButtonModule,
+    MatInputModule,
+    MatCardModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSelectModule,
     AngularFireAuthModule
   ],
   providers: [{provide: APP_CONFIG, useValue: AppConfig}],

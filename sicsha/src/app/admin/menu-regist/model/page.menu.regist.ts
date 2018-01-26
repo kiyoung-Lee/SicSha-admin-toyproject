@@ -1,4 +1,4 @@
-export class RegistFormData {
+export class RegistMenuData {
   centerName: string = null;
   date: string;
   time: string = null;

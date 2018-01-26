@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {RegistFormData} from "./model/page.regist";
+import {RegistMenuData} from "./model/page.menu.regist";
 import {DateMenu} from "./model/menu.date";
 import {MainRepository} from "./app.repository";
 import {AngularFireDatabase} from "angularfire2/database";
@@ -17,7 +17,7 @@ import {DinnerMenu} from "./model/menu.dinner";
 })
 export class MenuRegistComponent implements OnInit {
 
-  menuData = new RegistFormData();
+  menuData = new RegistMenuData();
   sicshaList: DateMenu[];
 
   dateList: string[];
