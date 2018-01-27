@@ -1,11 +1,22 @@
 import {Injectable} from '@angular/core';
 import {Http} from '@angular/http';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 @Injectable()
 export class MainRepository{
 
-  constructor(private http: Http) {
+  constructor(private http: Http, private db: AngularFireDatabase) {
 
+  }
+
+  registDate(date: String){
+    this.db.database.ref('/sicsha/' + date).once('value').then(function(snapshot) {
+      if(snapshot.val() != null){
+        alert("이미 등록된 날짜입니다.");
+      }else{
+
+      }
+    });
   }
 
   getDateList(): Promise<any>{

@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {RegistMenuData} from "./model/page.menu.regist";
 import {DateMenu} from "./model/menu.date";
-import {MainRepository} from "./app.repository";
-import {AngularFireDatabase} from "angularfire2/database";
+import {MainRepository} from "./menu-regist.repository";
 import {RestaurantMenu} from "./model/menu.restaurant";
 import {ElementMenu} from "./model/menu.element";
 import {BreakFastMenu} from "./model/menu.breakfast";
@@ -24,7 +23,7 @@ export class MenuRegistComponent implements OnInit {
   centerList: string[];
   foodTimeList: string[];
 
-  constructor(private repository: MainRepository, private db: AngularFireDatabase) {
+  constructor(private repository: MainRepository) {
 
   }
 
@@ -49,7 +48,7 @@ export class MenuRegistComponent implements OnInit {
   }
 
   clickDateRegist($event){
-
+    this.repository.registDate("2018-01-01");
   }
 
   clickCenterRegist($event){
