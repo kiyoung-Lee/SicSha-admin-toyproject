@@ -10,24 +10,27 @@ export class MainRepository{
   }
 
   registDate(date: String){
-    this.db.database.ref('/sicsha/' + date).once('value').then(function(snapshot) {
-      if(snapshot.val() != null){
-        alert("이미 등록된 날짜입니다.");
-      }else{
-
-      }
-    });
+    // this.db.database.ref('/sicsha/' + date).once('value').then(function(snapshot) {
+    //   if(snapshot.val() != null){
+    //     alert("이미 등록된 날짜입니다.");
+    //   }else{
+    //
+    //   }
+    // });
   }
 
-  getDateList(): Promise<any>{
-    const result = new Promise((resolve, reject) => {
-      this.http.get('https://sicsha-7c1e2.firebaseio.com/dateList.json')
-        .subscribe(response => {
-          var res = response.json();
-          resolve(res);
-        });
-    });
-    return result;
+  registCenter(){
+
+  }
+
+  registMenu(){
+
+  }
+
+  getDateList(dateList: string[]){
+    this.db.database.ref('/dateList/').on('value', function (snapshot) {
+      dateList = snapshot.val();
+    })
   }
 
   getCenterList(): Promise<any>{
@@ -52,7 +55,7 @@ export class MainRepository{
     return result;
   }
 
-  registMenu(menuPage: number, param: any): Promise<any>{
+  registMenu_temp(menuPage: number, param: any): Promise<any>{
     let url = "https://sicsha-7c1e2.firebaseio.com/sicsha/" + menuPage + ".json";
     const result = new Promise((resolve, reject) => {
       this.http.patch(url, param)

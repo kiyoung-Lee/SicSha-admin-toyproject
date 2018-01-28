@@ -32,9 +32,7 @@ export class MenuRegistComponent implements OnInit {
   }
 
   pageDataInit(){
-    this.repository.getDateList().then( value => {
-      this.dateList = value;
-    })
+    this.repository.getDateList(this.dateList);
 
     this.repository.getCenterList().then(value => {
       this.centerList = value;
@@ -45,10 +43,13 @@ export class MenuRegistComponent implements OnInit {
     })
 
     this.foodTimeList = ["breakfast", "lunch", "dinner"];
+
+
   }
 
   clickDateRegist($event){
-    this.repository.registDate("2018-01-01");
+    console.log(this.dateList);
+    this.repository.registDate("2018-02-01");
   }
 
   clickCenterRegist($event){
@@ -61,7 +62,7 @@ export class MenuRegistComponent implements OnInit {
     console.log(body);
     let param = this.generateMenuData();
 
-    this.repository.registMenu(this.sicshaList.length, JSON.stringify(param));
+    this.repository.registMenu_temp(this.sicshaList.length, JSON.stringify(param));
   }
 
   generateMenuData(): DateMenu{
