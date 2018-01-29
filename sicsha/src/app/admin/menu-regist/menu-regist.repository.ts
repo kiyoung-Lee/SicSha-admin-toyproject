@@ -1,36 +1,43 @@
 import {Injectable} from '@angular/core';
 import {Http} from '@angular/http';
 import { AngularFireDatabase } from 'angularfire2/database';
+import {RestaurantMenu} from "./model/menu.restaurant";
 
 @Injectable()
 export class MainRepository{
+  dateList: string[];
 
   constructor(private http: Http, private db: AngularFireDatabase) {
-
+    this.getDateList();
   }
 
-  registDate(date: String){
-    // this.db.database.ref('/sicsha/' + date).once('value').then(function(snapshot) {
-    //   if(snapshot.val() != null){
-    //     alert("이미 등록된 날짜입니다.");
-    //   }else{
-    //
-    //   }
-    // });
+  registDate(dateList: string[], registDate: string){
+    if(dateList.some(x => x === registDate)){
+      alert("이미 등록된 날짜입니다.")
+    }else{
+
+    }
   }
 
-  registCenter(){
+  registCenter(dateIdx: number, centerName: string){
+    this.db.database.ref('/sicsha/' + dateIdx + '/restaurant/').on('value', function (snapshot) {
+      let restaurantList :RestaurantMenu[] = snapshot.val();
+      if(restaurantList.some(x => x.centerName === centerName)){
+        alert("이미 등록된 센터 이름입니다.");
+      }else {
 
+      }
+    });
   }
 
   registMenu(){
 
   }
 
-  getDateList(dateList: string[]){
+  getDateList(){
     this.db.database.ref('/dateList/').on('value', function (snapshot) {
-      dateList = snapshot.val();
-    })
+      this.dateList = snapshot.val();
+    });
   }
 
   getCenterList(): Promise<any>{

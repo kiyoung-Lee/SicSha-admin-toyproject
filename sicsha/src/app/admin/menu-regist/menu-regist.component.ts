@@ -19,7 +19,6 @@ export class MenuRegistComponent implements OnInit {
   menuData = new RegistMenuData();
   sicshaList: DateMenu[];
 
-  dateList: string[];
   centerList: string[];
   foodTimeList: string[];
 
@@ -32,8 +31,6 @@ export class MenuRegistComponent implements OnInit {
   }
 
   pageDataInit(){
-    this.repository.getDateList(this.dateList);
-
     this.repository.getCenterList().then(value => {
       this.centerList = value;
     });
@@ -48,8 +45,7 @@ export class MenuRegistComponent implements OnInit {
   }
 
   clickDateRegist($event){
-    console.log(this.dateList);
-    this.repository.registDate("2018-02-01");
+    this.repository.registDate(this.dateList, "2018-01-15");
   }
 
   clickCenterRegist($event){
