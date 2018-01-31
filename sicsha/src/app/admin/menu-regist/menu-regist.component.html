@@ -2,7 +2,8 @@
   <mat-card-content>
     <form class="example-form">
       <mat-form-field>
-        <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+        <input matInput [matDatepicker]="picker" placeholder="Choose a date"
+               (dateInput)="registDatePickerChangeEvent('input', $event)" (dateChange)="registDatePickerChangeEvent('change', $event)">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
@@ -15,13 +16,14 @@
   <mat-card-content>
     <form class="example-form">
       <mat-form-field class="example-full-width">
-        <mat-select placeholder="날짜">
-          <mat-option>
+        <mat-select placeholder="날짜" [(ngModel)]="inputRegistCenterDateIdx" [ngModelOptions]="{standalone: true}">
+          <mat-option *ngFor="let registerdDate of repository.dateList; let idx = index" [value]="idx">
+            {{ registerdDate }}
           </mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field class="example-full-width">
-        <input matInput placeholder="센터명">
+        <input matInput placeholder="센터명" [(ngModel)]="inputRegistCenterName" [ngModelOptions]="{standalone: true}">
       </mat-form-field>
       <button mat-raised-button [color]="'primary'" (click)="clickCenterRegist($event)">센터등록</button>
     </form>
