@@ -41,8 +41,9 @@ export class MainRepository{
 
   registCenterAction(dateIdx: number, centerName: string){
     if(this.centerList[dateIdx] != null){
-      let centerNameList = this.centerList[dateIdx].centerName;
-      if(centerNameList.some(x => x === centerName)){
+
+      let centerNameList:string[] = this.centerList[dateIdx].centerName;
+      if(this.isCenterNameContains(centerNameList, centerName)){
         alert("이미 등록된 센터 이름입니다.");
       }else{
         let nameIdx = centerNameList.length;
@@ -73,6 +74,17 @@ export class MainRepository{
 
       alert("센터 등록 성공");
     }
+  }
+
+  isCenterNameContains(centerNameList:string[], centerName:string){
+    let isContains = false;
+    for (let idx in centerNameList){
+      if(centerNameList[idx] === centerName){
+        isContains = true;
+      }
+    }
+
+    return isContains;
   }
 
   registMenu(){

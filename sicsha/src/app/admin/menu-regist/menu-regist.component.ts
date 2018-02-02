@@ -4,6 +4,7 @@ import {SicshaDate} from "./model/menu.date";
 import {MainRepository} from "./menu-regist.repository";
 import {MatDatepickerInputEvent} from "@angular/material";
 import moment = require("moment");
+import {FormControl} from '@angular/forms';
 
 
 @Component({
@@ -21,9 +22,10 @@ export class MenuRegistComponent implements OnInit {
 
   centerList: string[];
   foodTimeList: string[];
+  selectDate = new FormControl();
 
   constructor(public repository: MainRepository) {
-
+    console.log(this.selectDate);
   }
 
   ngOnInit() {
@@ -41,7 +43,6 @@ export class MenuRegistComponent implements OnInit {
 
   registDatePickerChangeEvent(type: string, event: MatDatepickerInputEvent<Date>) {
     this.inputRegistDate = moment(event.value).format('YYYY-MM-DD');
-    // this.inputRegistDate = `${event.value.getFullYear()}-${(event.value.getMonth() + 1)}-${event.value.getDate()}`;
   }
 
   clickDateRegist($event){

@@ -35,13 +35,14 @@
     <div>
       <form class="example-form">
         <mat-form-field class="example-full-width">
-          <mat-select [(ngModel)] = "menuData.date" [ngModelOptions]="{standalone: true}" placeholder="날짜">
-            <mat-option>
+          <mat-select [(ngModel)] = "menuData.date" [formControl]="selectDate" placeholder="날짜">
+            <mat-option *ngFor="let registerdDate of repository.dateList; let idx = index" [value]="idx">
+              {{ registerdDate }}
             </mat-option>
           </mat-select>
         </mat-form-field>
         <mat-form-field class="example-full-width">
-          <mat-select [(ngModel)] = "menuData.centerName" [ngModelOptions]="{standalone: true}" placeholder="센터명">
+          <mat-select [(ngModel)] = "menuData.centerName" [ngModelOptions]="{standalone: true}" placeholder="센터명(날짜별)">
             <mat-option>
             </mat-option>
           </mat-select>
