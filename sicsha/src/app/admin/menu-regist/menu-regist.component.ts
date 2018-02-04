@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {RegistMenuData} from "./model/page.menu.regist";
 import {SicshaDate} from "./model/menu.date";
 import {MainRepository} from "./menu-regist.repository";
-import {MatDatepickerInputEvent} from "@angular/material";
+import {MatDatepickerInputEvent, MatSelectChange} from "@angular/material";
 import moment = require("moment");
 import {FormControl} from '@angular/forms';
 
@@ -20,8 +20,8 @@ export class MenuRegistComponent implements OnInit {
   menuData = new RegistMenuData();
   sicshaList: SicshaDate[];
 
-  centerList: string[];
   foodTimeList: string[];
+  menuTypeList: string[];
   selectDate = new FormControl();
 
   constructor(public repository: MainRepository) {
@@ -39,6 +39,7 @@ export class MenuRegistComponent implements OnInit {
     })
 
     this.foodTimeList = ["breakfast", "lunch", "dinner"];
+    this.menuTypeList = ["한식", "중식", "일식", "양식", "특식" ];
   }
 
   registDatePickerChangeEvent(type: string, event: MatDatepickerInputEvent<Date>) {
@@ -54,7 +55,8 @@ export class MenuRegistComponent implements OnInit {
   }
 
   setMenuRegistDate($event, idx){
-    console.log("dateChange" + idx);
+    console.log("dateChange" + this.menuData.date);
+    this.repository.setCenterNameByDate(this.menuData.date);
   }
 
   clickBtnRegist($event) {

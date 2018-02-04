@@ -35,7 +35,7 @@
     <div>
       <form class="example-form">
         <mat-form-field class="example-full-width">
-          <mat-select [(ngModel)] = "menuData.date" [formControl]="selectDate" placeholder="날짜" (selectionChange)="setMenuRegistDate($event, idx)">
+          <mat-select [(ngModel)] = "menuData.date" [formControl]="selectDate" placeholder="날짜" (selectionChange)="setMenuRegistDate($event)">
             <mat-option *ngFor="let registerdDate of repository.dateList; let idx = index" [value]="idx" >
               {{ registerdDate }}
             </mat-option>
@@ -43,7 +43,8 @@
         </mat-form-field>
         <mat-form-field class="example-full-width">
           <mat-select [(ngModel)] = "menuData.centerName" [ngModelOptions]="{standalone: true}" placeholder="센터명(날짜별)">
-            <mat-option>
+            <mat-option *ngFor="let centerName of repository.dateCenterList; let idx = index" [value]="idx" >
+              {{ centerName }}
             </mat-option>
           </mat-select>
         </mat-form-field>
@@ -53,13 +54,15 @@
       <form class="example-form">
         <mat-form-field class="example-full-width">
           <mat-select [(ngModel)] = "menuData.time" [ngModelOptions]="{standalone: true}" placeholder="식사시간">
-            <mat-option>
+            <mat-option *ngFor="let foodTime of foodTimeList; let idx = index" [value]="idx">
+              {{ foodTime }}
             </mat-option>
           </mat-select>
         </mat-form-field>
         <mat-form-field class="example-full-width">
           <mat-select [(ngModel)] = "menuData.type" [ngModelOptions]="{standalone: true}" placeholder="메뉴타입">
-            <mat-option>
+            <mat-option *ngFor="let menuType of menuTypeList; let idx = index" [value]="idx">
+              {{ menuType }}
             </mat-option>
           </mat-select>
         </mat-form-field>

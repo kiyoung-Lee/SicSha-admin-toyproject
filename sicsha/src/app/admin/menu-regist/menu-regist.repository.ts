@@ -11,6 +11,8 @@ export class MainRepository{
   dateList: string[];
   centerList: CenterListName[];
 
+  dateCenterList: string[];
+
   constructor(private http: Http, private db: AngularFireDatabase) {
     this.getDateList();
 
@@ -85,6 +87,10 @@ export class MainRepository{
     }
 
     return isContains;
+  }
+
+  setCenterNameByDate(dateIdx: number){
+    this.dateCenterList = this.centerList[dateIdx].centerName;
   }
 
   registMenu(){
