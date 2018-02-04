@@ -35,8 +35,8 @@
     <div>
       <form class="example-form">
         <mat-form-field class="example-full-width">
-          <mat-select [(ngModel)] = "menuData.date" [formControl]="selectDate" placeholder="날짜">
-            <mat-option *ngFor="let registerdDate of repository.dateList; let idx = index" [value]="idx">
+          <mat-select [(ngModel)] = "menuData.date" [formControl]="selectDate" placeholder="날짜" (selectionChange)="setMenuRegistDate($event, idx)">
+            <mat-option *ngFor="let registerdDate of repository.dateList; let idx = index" [value]="idx" >
               {{ registerdDate }}
             </mat-option>
           </mat-select>

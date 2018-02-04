@@ -53,6 +53,10 @@ export class MenuRegistComponent implements OnInit {
     this.repository.registCenterAction(this.inputRegistCenterDateIdx, this.inputRegistCenterName);
   }
 
+  setMenuRegistDate($event, idx){
+    console.log("dateChange" + idx);
+  }
+
   clickBtnRegist($event) {
     console.log(this.menuData.date)
     let body = JSON.stringify(this.menuData);
