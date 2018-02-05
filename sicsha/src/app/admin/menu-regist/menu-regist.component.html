@@ -35,14 +35,14 @@
     <div>
       <form class="example-form">
         <mat-form-field class="example-full-width">
-          <mat-select [(ngModel)] = "menuData.date" [formControl]="selectDate" placeholder="날짜" (selectionChange)="setMenuRegistDate($event)">
+          <mat-select [(ngModel)] = "menuData.date" [formControl]="selectDate" placeholder="날짜" (change)="setMenuRegistDate($event)">
             <mat-option *ngFor="let registerdDate of repository.dateList; let idx = index" [value]="idx" >
               {{ registerdDate }}
             </mat-option>
           </mat-select>
         </mat-form-field>
         <mat-form-field class="example-full-width">
-          <mat-select [(ngModel)] = "menuData.centerName" [ngModelOptions]="{standalone: true}" placeholder="센터명(날짜별)">
+          <mat-select [(ngModel)] = "menuData.centerName" [ngModelOptions]="{standalone: true}" placeholder="센터명(날짜별)" (change)="getMenuPackage($event)">
             <mat-option *ngFor="let centerName of repository.dateCenterList; let idx = index" [value]="idx" >
               {{ centerName }}
             </mat-option>
@@ -53,15 +53,15 @@
     <div>
       <form class="example-form">
         <mat-form-field class="example-full-width">
-          <mat-select [(ngModel)] = "menuData.time" [ngModelOptions]="{standalone: true}" placeholder="식사시간">
-            <mat-option *ngFor="let foodTime of foodTimeList; let idx = index" [value]="idx">
+          <mat-select [(ngModel)] = "menuData.time" [ngModelOptions]="{standalone: true}" placeholder="식사시간" (change)="getMenuPackage($event)">
+            <mat-option *ngFor="let foodTime of foodTimeList" [value]="foodTime">
               {{ foodTime }}
             </mat-option>
           </mat-select>
         </mat-form-field>
         <mat-form-field class="example-full-width">
           <mat-select [(ngModel)] = "menuData.type" [ngModelOptions]="{standalone: true}" placeholder="메뉴타입">
-            <mat-option *ngFor="let menuType of menuTypeList; let idx = index" [value]="idx">
+            <mat-option *ngFor="let menuType of menuTypeList" [value]="menuType">
               {{ menuType }}
             </mat-option>
           </mat-select>
@@ -73,7 +73,7 @@
         <mat-form-field class="input-menu-form">
           <input [(ngModel)] = "menuData.menu" [ngModelOptions]="{standalone: true}" matInput  placeholder="메뉴">
         </mat-form-field>
-        <button mat-raised-button [color]="'primary'" (click)="clickCenterRegist($event)">메뉴등록</button>
+        <button mat-raised-button [color]="'primary'" (click)="clickMenuRegist($event)">메뉴등록</button>
       </form>
     </div>
   </mat-card-content>

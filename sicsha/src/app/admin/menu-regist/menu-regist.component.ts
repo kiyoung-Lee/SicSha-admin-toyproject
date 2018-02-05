@@ -18,11 +18,11 @@ export class MenuRegistComponent implements OnInit {
   inputRegistCenterDateIdx: number;
   inputRegistCenterName: string;
   menuData = new RegistMenuData();
-  sicshaList: SicshaDate[];
 
   foodTimeList: string[];
   menuTypeList: string[];
   selectDate = new FormControl();
+  isFirst:boolean = false;
 
   constructor(public repository: MainRepository) {
     console.log(this.selectDate);
@@ -33,11 +33,6 @@ export class MenuRegistComponent implements OnInit {
   }
 
   pageDataInit(){
-
-    this.repository.getSicshaList().then(value => {
-      this.sicshaList = value;
-    })
-
     this.foodTimeList = ["breakfast", "lunch", "dinner"];
     this.menuTypeList = ["한식", "중식", "일식", "양식", "특식" ];
   }
@@ -54,15 +49,16 @@ export class MenuRegistComponent implements OnInit {
     this.repository.registCenterAction(this.inputRegistCenterDateIdx, this.inputRegistCenterName);
   }
 
-  setMenuRegistDate($event, idx){
-    console.log("dateChange" + this.menuData.date);
-    this.repository.setCenterNameByDate(this.menuData.date);
+  setMenuRegistDate(event : MatSelectChange){
+    this.repository.setCenterNameByDate(event.value);
   }
 
-  clickBtnRegist($event) {
-    console.log(this.menuData.date)
-    let body = JSON.stringify(this.menuData);
-    console.log(body);
+  clickMenuRegist($event) {
+    this.repository.registMenu(this.menuData);
+  }
+
+  getMenuPackage($event) {
+    this.repository.getMenuPackage(this.menuData);
   }
 
 }

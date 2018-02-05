@@ -1,17 +1,18 @@
 import {Injectable} from '@angular/core';
 import {Http} from '@angular/http';
 import { AngularFireDatabase } from 'angularfire2/database';
-import {RestaurantMenu} from "./model/menu.restaurant";
 import {CenterListName} from "./model/page.center.name";
 import {SicshaDate} from "./model/menu.date";
 import {RestaurantNameList} from "./model/menu.center.name";
+import {RegistMenuData} from "./model/page.menu.regist";
 
 @Injectable()
 export class MainRepository{
   dateList: string[];
   centerList: CenterListName[];
-
   dateCenterList: string[];
+  menuPackage:any;
+  menuTypeList: any;
 
   constructor(private http: Http, private db: AngularFireDatabase) {
     this.getDateList();
@@ -37,6 +38,7 @@ export class MainRepository{
     addDate.date = registDate;
 
     this.db.database.ref('/dateList/' + index).set(registDate);
+    this.db.database.ref('/centerList/' + index + /centerName/).set("");
     this.db.database.ref('/sicsha/' + index).set(addDate);
     alert("날짜 등록 성공.");
   }
@@ -51,8 +53,8 @@ export class MainRepository{
         let nameIdx = centerNameList.length;
         this.db.database.ref('/centerList/' + dateIdx + '/centerName/' + nameIdx).set(centerName);
 
-        this.db.database.ref('/sicsha/' + dateIdx + '/restaurant/' + nameIdx + '/centerName/').update({
-          restaurant: centerName
+        this.db.database.ref('/sicsha/' + dateIdx + '/restaurant/' + nameIdx).update({
+          centerName: centerName
         });
 
         alert("센터 등록 성공");
@@ -76,6 +78,7 @@ export class MainRepository{
 
       alert("센터 등록 성공");
     }
+
   }
 
   isCenterNameContains(centerNameList:string[], centerName:string){
@@ -90,45 +93,53 @@ export class MainRepository{
   }
 
   setCenterNameByDate(dateIdx: number){
+    this.dateCenterList = [];
     this.dateCenterList = this.centerList[dateIdx].centerName;
   }
 
-  registMenu(){
+  registMenu(menuData: RegistMenuData){
+    let menuList = menuData.menu.split(",");
 
+    if(this.menuPackage.length != 0){
+      if(this.menuTypeList.length != 0){
+        this.db.database.ref('/sicsha/' + menuData.date + '/restaurant/' + menuData.centerName + '/menu/' + menuData.time + '/' + this.menuTypeList.length + '/').update({
+          menutype:menuData.type,
+          menuList:menuList
+        });
+        alert("메뉴 등록 성공");
+        return;
+      }
+    }
+
+    this.db.database.ref('/sicsha/' + menuData.date + '/restaurant/' + menuData.centerName + '/menu/' + menuData.time + '/0/').update({
+      menutype:menuData.type,
+      menuList:menuList
+    });
+
+    alert("메뉴 등록 성공");
   }
 
   getDateList() {
     this.db.list<any>('dateList').valueChanges().subscribe(list => {
       this.dateList = list;
-    });
+  });
   }
 
   getCenterList(){
     this.db.list<any>('centerList').valueChanges().subscribe(list => {
       this.centerList = list;
     });
+
   }
 
-  getSicshaList(): Promise<any>{
-    const result = new Promise((resolve, reject) => {
-      this.http.get('https://sicsha-7c1e2.firebaseio.com/sicsha.json')
-        .subscribe(response => {
-          var res = response.json();
-          resolve(res);
-        });
+  getMenuPackage(menuData: RegistMenuData){
+    this.db.list<any>('/sicsha/' + menuData.date + '/restaurant/' + menuData.centerName + /menu/).valueChanges().subscribe(list => {
+      this.menuPackage = list;
     });
-    return result;
-  }
 
-  registMenu_temp(menuPage: number, param: any): Promise<any>{
-    let url = "https://sicsha-7c1e2.firebaseio.com/sicsha/" + menuPage + ".json";
-    const result = new Promise((resolve, reject) => {
-      this.http.patch(url, param)
-        .subscribe( response =>{
-
-        });
+    this.db.list<any>('/sicsha/' + menuData.date + '/restaurant/' + menuData.centerName + '/menu/' + menuData.time).valueChanges().subscribe(list => {
+      this.menuTypeList = list;
     });
-    return result;
   }
 
 }

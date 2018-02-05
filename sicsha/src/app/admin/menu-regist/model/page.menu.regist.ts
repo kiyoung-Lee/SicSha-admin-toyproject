@@ -1,7 +1,7 @@
 export class RegistMenuData {
-  centerName: string = null;
+  centerName: number;
   date: number;
-  time: string = null;
+  time: string;
   type: string;
   menu: string;
 }
