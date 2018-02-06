@@ -22,7 +22,6 @@ export class MenuRegistComponent implements OnInit {
   foodTimeList: string[];
   menuTypeList: string[];
   selectDate = new FormControl();
-  isFirst:boolean = false;
 
   constructor(public repository: MainRepository) {
     console.log(this.selectDate);
